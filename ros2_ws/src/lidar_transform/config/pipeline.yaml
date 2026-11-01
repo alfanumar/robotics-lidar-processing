@@ -1,0 +1,8 @@
+simulated_lidar_publisher:
+  ros__parameters:
+    frame_id: lidar_frame
+    publish_rate_hz: 5.0
+
+lidar_transform_node:
+  ros__parameters:
+    angle_deg: 30.0

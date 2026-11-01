@@ -1,0 +1,17 @@
+# CMake and ROS2 build artifacts
+build/
+ros2_ws/build/
+ros2_ws/install/
+ros2_ws/log/
+
+# Python and local tooling
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# ROS runtime logs
+.ros/
+
+# Local editor files
+.vscode/
+.idea/
