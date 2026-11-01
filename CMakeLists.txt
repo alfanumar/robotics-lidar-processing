@@ -6,3 +6,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(pointcloud_transform src/pointcloud_transform.cpp)
+target_compile_options(pointcloud_transform PRIVATE -Wall -Wextra -Wpedantic)

@@ -1,5 +1,6 @@
 #include <cmath>
 #include <memory>
+#include <stdexcept>
 
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/point_cloud2.hpp"
@@ -9,6 +10,9 @@ class LidarTransformNode final : public rclcpp::Node {
 public:
     LidarTransformNode() : Node("lidar_transform_node") {
         const double angle_degrees = declare_parameter<double>("angle_deg", 30.0);
+        if (!std::isfinite(angle_degrees)) {
+            throw std::invalid_argument("angle_deg must be finite");
+        }
         angle_radians_ = angle_degrees * std::acos(-1.0) / 180.0;
         cosine_ = std::cos(angle_radians_);
         sine_ = std::sin(angle_radians_);
@@ -20,6 +24,8 @@ public:
             [this](const sensor_msgs::msg::PointCloud2::SharedPtr message) {
                 transform_and_publish(*message);
             });
+        RCLCPP_INFO(
+            get_logger(), "Transforming PointCloud2 around Z axis by %.2f degrees", angle_degrees);
     }
 
 private:

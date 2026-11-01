@@ -1,6 +1,7 @@
 #include <chrono>
 #include <cmath>
 #include <memory>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
@@ -19,12 +20,22 @@ public:
     SimulatedLidarPublisher() : Node("simulated_lidar_publisher") {
         frame_id_ = declare_parameter<std::string>("frame_id", "lidar_frame");
         const double publish_rate_hz = declare_parameter<double>("publish_rate_hz", 5.0);
+        if (frame_id_.empty()) {
+            throw std::invalid_argument("frame_id must not be empty");
+        }
+        if (!std::isfinite(publish_rate_hz) || publish_rate_hz <= 0.0) {
+            throw std::invalid_argument("publish_rate_hz must be finite and greater than zero");
+        }
         const auto period = std::chrono::duration_cast<std::chrono::milliseconds>(
             std::chrono::duration<double>(1.0 / publish_rate_hz));
 
         publisher_ = create_publisher<sensor_msgs::msg::PointCloud2>(
             "points", rclcpp::SensorDataQoS());
         timer_ = create_wall_timer(period, [this]() { publish_scan(); });
+        RCLCPP_INFO(
+            get_logger(),
+            "Publishing synthetic point cloud: frame_id='%s', rate=%.2f Hz, points=%zu",
+            frame_id_.c_str(), publish_rate_hz, make_scene().size());
     }
 
 private:
@@ -62,7 +73,7 @@ private:
     }
 
     void publish_scan() {
-        const auto points = make_scene();
+        static const auto points = make_scene();
         sensor_msgs::msg::PointCloud2 cloud;
         cloud.header.stamp = now();
         cloud.header.frame_id = frame_id_;

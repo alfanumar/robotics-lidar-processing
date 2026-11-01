@@ -11,6 +11,7 @@ __pycache__/
 
 # ROS runtime logs
 .ros/
+log/
 
 # Local editor files
 .vscode/
