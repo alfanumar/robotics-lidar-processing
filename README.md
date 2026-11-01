@@ -56,7 +56,7 @@ ros2 topic echo /points_transformed --once
 
 The simulated publisher generates a static room boundary and a rectangular obstacle. The transformed cloud rotates the XY coordinates by 30 degrees while preserving the Z coordinate.
 
-Current validation results are recorded in [`docs/RESULTS.md`](docs/RESULTS.md). Media placeholders and publication guidance are in [`media/README.md`](media/README.md).
+Current validation results are recorded in [`docs/RESULTS.md`](docs/RESULTS.md). Media and publication guidance are in [`media/README.md`](media/README.md). The current simulation evidence includes [`media/rviz-simulation.png`](media/rviz-simulation.png) and [`media/pipeline-diagram.svg`](media/pipeline-diagram.svg).
 
 ## Tests
 

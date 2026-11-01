@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#0f766e"/>
+    </marker>
+    <style>
+      .title { font: 700 30px sans-serif; fill: #111827; }
+      .label { font: 700 20px sans-serif; fill: #111827; }
+      .detail { font: 16px sans-serif; fill: #374151; }
+      .box { fill: #f0fdfa; stroke: #0f766e; stroke-width: 3; rx: 18; }
+      .arrow { stroke: #0f766e; stroke-width: 4; marker-end: url(#arrow); }
+      .note { font: 15px sans-serif; fill: #4b5563; }
+    </style>
+  </defs>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="600" y="54" text-anchor="middle" class="title">Simulation-Based ROS2 LiDAR Pipeline</text>
+
+  <rect x="45" y="145" width="245" height="190" class="box"/>
+  <text x="167" y="190" text-anchor="middle" class="label">Simulated LiDAR</text>
+  <text x="167" y="225" text-anchor="middle" class="detail">Room boundary</text>
+  <text x="167" y="250" text-anchor="middle" class="detail">Obstacle returns</text>
+  <text x="167" y="275" text-anchor="middle" class="detail">PointCloud2 /points</text>
+
+  <line x1="290" y1="240" x2="405" y2="240" class="arrow"/>
+
+  <rect x="405" y="145" width="315" height="190" class="box"/>
+  <text x="562" y="190" text-anchor="middle" class="label">C++ ROS2 Node</text>
+  <text x="562" y="225" text-anchor="middle" class="detail">Subscribe to PointCloud2</text>
+  <text x="562" y="250" text-anchor="middle" class="detail">Rotate XY by 30 degrees</text>
+  <text x="562" y="275" text-anchor="middle" class="detail">Publish transformed cloud</text>
+
+  <line x1="720" y1="240" x2="835" y2="240" class="arrow"/>
+
+  <rect x="835" y="145" width="320" height="190" class="box"/>
+  <text x="995" y="190" text-anchor="middle" class="label">RViz2 Visualization</text>
+  <text x="995" y="225" text-anchor="middle" class="detail">Input cloud: white</text>
+  <text x="995" y="250" text-anchor="middle" class="detail">Output cloud: green</text>
+  <text x="995" y="275" text-anchor="middle" class="detail">Fixed frame: lidar_frame</text>
+
+  <text x="600" y="410" text-anchor="middle" class="note">Software-in-the-loop validation; no physical LiDAR hardware is claimed.</text>
+  <text x="600" y="440" text-anchor="middle" class="note">Topics: /points  -&gt;  /points_transformed</text>
+</svg>
